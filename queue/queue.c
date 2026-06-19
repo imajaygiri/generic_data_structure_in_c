@@ -38,12 +38,18 @@ Queue *Queue_init(size_t element_size) {
 }
 
 void Queue_enque(Queue *queue, const void *data) {
-    CHECK_QUEUE_NULL_ERROR(queue);
+    if (!queue) {
+        LOG_ERROR("ERROR queue can not be null");
+        return;
+    }
     List_push_front(queue->list, data);
 }
 
 void Queue_deque(Queue *queue) {
-    CHECK_QUEUE_NULL_ERROR(queue);
+    if (!queue) {
+        LOG_ERROR("ERROR queue can not be null");
+        return;
+    }
     bool result = List_pop_back(queue->list);
     if (!result) {
         LOG_ERROR("Dequeu failed , Some error occured");
@@ -52,11 +58,32 @@ void Queue_deque(Queue *queue) {
 }
 
 void *Queue_peek(Queue *queue) {
-    CHECK_QUEUE_NULL_ERROR(queue);
+    if (!queue) {
+        LOG_ERROR("ERROR queue can not be null");
+        return NULL;
+    }
     return List_peek_back(queue->list);
 }
 size_t Queue_len(Queue *queue) {
-    CHECK_QUEUE_NULL_ERROR(queue);
+    if (!queue) {
+        LOG_ERROR("ERROR queue can not be null");
+        return 0;
+    }
     return List_len(queue->list);
 }
-List *Queue_list(Queue *queue) { return queue->list; }
+void Queue_destroy(Queue *queue) {
+    if (!queue) {
+        LOG_ERROR("ERROR queue can not be null");
+        return;
+    }
+
+    List_destroy(queue->list);
+    free(queue);
+}
+List *Queue_list(Queue *queue) {
+    if (!queue) {
+        LOG_ERROR("ERROR queue can not be null");
+        return NULL;
+    }
+    return queue->list;
+}

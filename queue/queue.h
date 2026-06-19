@@ -17,4 +17,5 @@ void Queue_deque(Queue *queue);
 void *Queue_peek(Queue *queue);
 size_t Queue_len(Queue *queue);
 List *Queue_list(Queue *queue);
+void Queue_destroy(Queue *queue);
 #endif
