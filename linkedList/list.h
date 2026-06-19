@@ -44,6 +44,6 @@ bool List_is_empty(List *list);
 bool List_pop_front(List *list);
 void List_destroy(List *list);
 bool List_delete_node(List *list, const void *key);
-void List_print(List *list, void (*print_fxn)(const void *data));
-void print_fxn(const void *data);
+void List_print(List *list, void (*_print_fxn_)(const void *data));
+size_t List_len(List *list);
 #endif

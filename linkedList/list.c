@@ -17,7 +17,6 @@ struct List {
     size_t element_size;
 };
 
-
 static ListNode *create_node(List *list, const void *data) {
     ListNode *node = malloc(sizeof(ListNode));
     if (!node) {
@@ -270,15 +269,20 @@ bool List_delete_node(List *list, const void *key) {
     return true;
 }
 
-void List_print(List *list, void (*print_fxn)(const void *data)) {
+void List_print(List *list, void (*_print_fxn_)(const void *data)) {
     Next it = List_create_iter(list);
     void *data = NULL;
     printf("[");
     while ((data = List_next(&it)) != NULL) {
-        print_fxn(data);
+        _print_fxn_(data);
     }
     printf("]");
 }
 
-void print_fxn(const void *data) { printf("%d ", *(int *)data); }
-
+size_t List_len(List *list) {
+    if (!list) {
+        perror("Error list can not be null");
+        return 0;
+    }
+    return list->len;
+}
