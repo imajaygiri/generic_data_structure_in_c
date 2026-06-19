@@ -17,11 +17,6 @@ struct List {
     size_t element_size;
 };
 
-typedef struct {
-    List *list;
-    size_t curr_idx;
-    ListNode *indexNode;
-} Next;
 
 static ListNode *create_node(List *list, const void *data) {
     ListNode *node = malloc(sizeof(ListNode));
@@ -287,14 +282,3 @@ void List_print(List *list, void (*print_fxn)(const void *data)) {
 
 void print_fxn(const void *data) { printf("%d ", *(int *)data); }
 
-int main(void) {
-
-    List *list = List_init(sizeof(int));
-    for (int i = 0; i < 5; i++) {
-        list_push_back(list, i);
-    }
-
-    List_print(list, print_fxn);
-
-    return 0;
-}
