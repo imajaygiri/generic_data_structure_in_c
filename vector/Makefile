@@ -1,8 +1,8 @@
-target:=liblist.a
-objfile:=list.o
-srcfile:= list.c
-headerfile:=list.h
-binary=list
+target:=libvec.a
+objfile:=vec.o
+srcfile:=vec.c
+headerfile:=vec.h
+binary=vec
 
 $(target): $(objfile)
 	ar rcs $@  $<

@@ -46,4 +46,5 @@ void List_destroy(List *list);
 bool List_delete_node(List *list, const void *key);
 void List_print(List *list, void (*_print_fxn_)(const void *data));
 size_t List_len(List *list);
+void *List_at_index(List *list, size_t idx);
 #endif

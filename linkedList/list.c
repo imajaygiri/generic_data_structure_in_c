@@ -4,6 +4,10 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#define LOG_ERROR(fmt)                                                         \
+    do {                                                                       \
+        fprintf(stderr, "%s: %d " fmt "\n", __FILE__, __LINE__);               \
+    } while (0)
 
 struct ListNode {
     void *data;
@@ -110,11 +114,9 @@ void *List_next(Next *it) {
     if (!it) {
         return NULL;
     }
-
     if (!it->indexNode) {
         return NULL;
     }
-
     void *data = it->indexNode->data;
     it->indexNode = it->indexNode->next;
     it->curr_idx++;
@@ -279,6 +281,22 @@ void List_print(List *list, void (*_print_fxn_)(const void *data)) {
     printf("]");
 }
 
+void *List_at_index(List *list, size_t idx) {
+    if (!list) {
+        LOG_ERROR("Error list is null");
+        return NULL;
+    }
+    if (idx >= list->len) {
+        LOG_ERROR("Error index can not be greater then len");
+        return NULL;
+    }
+    Next it = List_create_iter(list);
+    for (int i = 0; i < idx; i++) {
+        List_next(&it);
+    }
+    return it.indexNode->data;
+}
+
 size_t List_len(List *list) {
     if (!list) {
         perror("Error list can not be null");
@@ -286,3 +304,4 @@ size_t List_len(List *list) {
     }
     return list->len;
 }
+

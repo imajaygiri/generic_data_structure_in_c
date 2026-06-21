@@ -1,8 +1,8 @@
-target:=liblist.a
-objfile:=list.o
-srcfile:= list.c
-headerfile:=list.h
-binary=list
+target:=libstr.a
+objfile:=str.o
+srcfile:= str.c
+headerfile:=str.h
+binary=str
 
 $(target): $(objfile)
 	ar rcs $@  $<
@@ -11,7 +11,7 @@ $(objfile): $(srcfile) $(headerfile)
 
 
 $(binary): $(objfile)
-	clang -llist $< -o $@
+	clang -lstr $< -o $@
 
 run: $(binary)
 	./$(binary)
